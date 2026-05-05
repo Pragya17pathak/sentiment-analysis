@@ -97,8 +97,21 @@ print("\nLogistic Regression Report:\n", classification_report(y_test, lr_pred))
 cm = confusion_matrix(y_test, nb_pred)
 print("\nConfusion Matrix:\n", cm)
 
+# 10. Custom Prediction
 
-# 10. BAR GRAPH (Accuracy)
+
+def predict_sentiment(text):
+    text = text.lower()
+    vector = tfidf.transform([text])
+    result = nb.predict(vector)[0]
+    return "Positive 😊" if result == 1 else "Negative 😞"
+
+print("\nCustom Prediction:")
+print(predict_sentiment("I love this product"))
+print(predict_sentiment("Worst experience ever"))
+
+
+# 11. BAR GRAPH (Accuracy)
 
 
 
@@ -114,7 +127,7 @@ plt.show()
 
 
 
-# 11. PIE CHART (Class Distribution)
+# 12. PIE CHART (Class Distribution)
 
 counts = df['target'].value_counts()
 
@@ -125,7 +138,7 @@ plt.show()
 
 
 
-# 12. HISTOGRAM (Prediction Distribution)
+# 13. HISTOGRAM (Prediction Distribution)
 
 plt.figure()
 plt.hist(nb_pred, bins=2)
@@ -136,7 +149,7 @@ plt.show()
 
 
 
-# 13. SCATTER (Precision vs Recall)
+# 14. SCATTER (Precision vs Recall)
 
 
 # Extract values manually (from report)
@@ -153,15 +166,3 @@ plt.show()
 
 
 
-# 14. Custom Prediction
-
-
-def predict_sentiment(text):
-    text = text.lower()
-    vector = tfidf.transform([text])
-    result = nb.predict(vector)[0]
-    return "Positive 😊" if result == 1 else "Negative 😞"
-
-print("\nCustom Prediction:")
-print(predict_sentiment("I love this product"))
-print(predict_sentiment("Worst experience ever"))
